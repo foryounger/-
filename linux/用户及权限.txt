@@ -1,105 +1,100 @@
-������Դ 
-     Ȩ��
-	 �û�����ʶ��
-	 �߼�����������Ȩ��-->�û��飺����ָ��Ȩ��
+计算资源 
+     	 权限
+	 用户：标识符
+	 逻辑容器、关联权限-->用户组：用于指派权限
 	 
-	 
-	 
-�û����顢Ȩ��
+用户、组、权限
 
-��ȫ�����ģ�secure context��:
-  Ȩ�ޣ�
-      r,w,x
-	  �ļ���
-			r:�ɶ�������ʹ������cat������鿴�ļ�����
-			w:��д�����Ա༭��ɾ�����ļ�
-			x:��ִ�У�exacutable������������ʾ���µ��������ύ���ں�������
+安全上下文（secure context）:
+  权限：r,w,x
+	文件：
+		r:可读，可以使用类似cat等命令查看文件内容
+		w:可写，可以编辑或删除此文件
+		x:可执行，exacutable，可以命令提示符下当作命令提交给内核运作；
 			
-	  Ŀ¼��
-	        r:���ԶԴ�Ŀ¼ִ��ls���г��ڲ������ļ�
-			w:�����ڴ�Ŀ¼�����ļ�
-			x:����ʹ��cd�л�����Ŀ¼��Ҳ����ʹ��ls -l�鿴�ڲ��ļ�����ϸ��Ϣ
+	目录：
+	        r:可以对此目录执行ls以列出内部所有文件
+		w:可以在此目录创建文件
+		x:可以使用cd切换进此目录，也可以使用ls -l查看内部文件的详细信息
 			
-	rwx��
-       r--��ֻ��
-	   r-x������ִ��
-	   ---����Ȩ��
-	 ��λһ�壺 777��rwxrwxrwx
-	    �û���UID��/etc/passwd		
-	    �飺GID, /etc/group
+	rwx：
+       	   r--：只读
+	   r-x：读和执行
+	   ---：无权限
+	 三位一体： 777：rwxrwxrwx
+	    用户：UID，/etc/passwd		
+	    组：GID, /etc/group
 		
-		Ӱ�ӿ��
-		     �û���/etc/shadow
-			 �飺/etc/gshadow
+		影子口令：
+		     用户：/etc/shadow
+			 组：/etc/gshadow
 			 
-�û����
-		����Ա��0
-		��ͨ�û���1-65535
-			ϵͳ�û���  1-499
-			һ���û� ��500-60000
-�û������
-     ����Ա�飺
-	 ��ͨ�飺
-	     ϵͳ�飺
-		 һ���飺
-�û������
-			�����飺�û���Ĭ����
-			˽���飺�����û�ʱ�����û��Ϊ��ָ���������飬ϵͳ���Զ�Ϊ�䴴��һ�����û���ͬ������
-			������-->�����⣺Ĭ���������������
-/etc/passwd	 
-	account:��¼��
-	passwd������
+用户类别：
+		管理员：0
+		普通用户：1-65535:
+			系统用户：  1-499
+			一般用户 ：500-60000
+用户组类别：
+     管理员组：
+	 普通组：
+	 系统组：
+        一般组：
+用户组类别：
+			基本组：用户的默认组
+			私有组：创建用户时，如果没有为其指定所属的组，系统会自动为其创建一个与用户名同名的组
+			附加组-->额外租：默认组以外的其他组
+/etc/passwd 文件格式：
+   用户名：密码：UID：GID:注释：家目录:默认shell
+	account:登录名
+	passwd：密码
 	UID:
-	GID:������ID
-	comment��ע��
-	HOME DIR:��Ŀ¼
-	SHELL:�û���Ĭ��shell
+	GID:基本组ID
+	comment：注释
+	HOME DIR:家目录
+	SHELL:用户的默认shell
 	
 /etc/shadow
-account :��¼��
-encrypted passwd :���ܵ�����
+account :登录名
+encrypted passwd :加密的密码
+	/etc/shadow:
+ 		用户名：密码：最近一次修改密码的时间：最短使用期限：警告时间：非活动时间:过期时间
+ 
 
 
-
-	���ܷ�����
-		�ԳƼ��ܣ����ܺͽ���ʹ��ͬһ������
-		��Կ���ܣ�ÿ�����붼�ɶԳ��֣�һ��Ϊ˽Կ��secret key����һ��Ϊ��Կ��public key��
-		������ܣ�ɢ�м��ܣ���ȡ���������루ָ�Ƽ��ܣ�-->����������������У��
-				1��ѩ��ЧӦ
-				2���������
-					MD5��message digest��128λ�������
-					SHA1��secure hash algorithm��160λ������� 
-
-useradd username :�����û�
-groupadd grpname��������
-�û�������
-		useradd��userdel,usermod,passwd,chsh,
+	加密方法：
+		对称加密：加密和解密使用同一个密码
+		公钥加密：每个密码都成对出现，一个为私钥（secret key），一个为公钥（public key）
+		单向加密，散列加密：提取数据特征码（指纹加密）-->常用作数据完整性校验
+				1、雪崩效应
+				2、定长输出
+					MD5；message digest，128位定长输出
+					SHA1；secure hash algorithm，160位定长输出 
+用户管理相关命令：
+	useradd username :添加用户
+	groupadd grpname：添加组
+	用户管理：
+		useradd，userdel,usermod,passwd,chsh,
 		chfn,finger,id,change,
-�������
-	groupadd,groupdel,groupmod,gpasswd
-Ȩ�޹���:
+	组管理：
+		groupadd,groupdel,groupmod,gpasswd
+	权限管理:
 		chown,chgrp,chmod,umask
 		
 		
-/etc/passwd:
- �û��������룺UID��GID:ע�ͣ���Ŀ¼:Ĭ��shell
  
- /etc/shadow:
- �û��������룺���һ���޸������ʱ�䣺���ʹ�����ޣ�����ʱ�䣺�ǻʱ��:����ʱ��
- 
-useradd��[options] username
+useradd：[options] username
        -u UID
-	   -g GID(������)
-	   -G GID ...�������飩
-	   -c ��COMMENT��(ע��)
-	   -d /path/to/somediretory(ָ����Ŀ¼)
-	   -s ָ��shell·�� ��/etc/shells������ǰϵͳ���õİ�ȫshell��
+	   -g GID(基本组)
+	   -G GID ...（额外组）
+	   -c “COMMENT”(注释)
+	   -d /path/to/somediretory(指定家目录)
+	   -s 指定shell路径 （/etc/shells包含当前系统可用的安全shell）
 	   -m -k
-	   -M Ϊ�û�������Ŀ¼
-	   -r������ϵͳ�û�
+	   -M 为用户创建家目录
+	   -r：添加系统用户
 /etc/login.defs	
 
-����������
+环境变量：
   PATH
   SHELL
   HISTSIZE
@@ -108,89 +103,89 @@ useradd��[options] username
 
 userdel:
   userdel [option]  ISERNAME
-    -r��ͬʱɾ���û��ļ�Ŀ¼
+    -r：同时删除用户的家目录
   
-  id :�鿴�û����˺�������Ϣ
+  id :查看用户的账号属性信息
 			-u
 			-g
 			-G 
 			-n
-   finger�������û��˺���Ϣ
+   finger：产看用户账号信息
    finger username
 
-����޸��û��˺����ԣ�
+如何修改用户账号属性：
   usermod 
-       -u����UID����
-	   -g����GID����
-	   -a -G �ĸ��������ԣ�������-aѡ��Ḳ�Ǵ�ǰ�ĸ����飺
+       -u：改UID属性
+	   -g：改GID属性
+	   -a -G 改附加组属性：不是用-a选项，会覆盖此前的附加组：
 	   -c
-	   -d -mһ��ʹ�� ���޸ļ�Ŀ¼ ����֮ǰ�ļ�Ŀ¼�ƶ����¼�Ŀ¼��
-	   -L:�����˺������ڽ���
-	   -U:�����˺�
+	   -d -m一起使用 ：修改家目录 并将之前的家目录移动至新家目录下
+	   -L:锁定账号类似于禁用
+	   -U:解锁账号
 
-chsh���޸��û�shell
+chsh：修改用户shell
 
-chfn���޸�ע����Ϣ
+chfn：修改注释信息
 
-���������
+密码管理：
   passwd [username]
     --stdin
-	-l�������û�
-	-u:����
-	-d��ɾ���û�����
- pwck������û��˺�������
+	-l；锁定用户
+	-u:解锁
+	-d：删除用户密码
+ pwck：检查用户账号完整性
     
 	
-�������
-   ������ groupadd
+组管理：
+   创建： groupadd
 		groupadd
-			-g ��GID
-			-r ������Ϊϵͳ��
+			-g ：GID
+			-r ：添加为系统组
 		    
-		groupmod��
-			-g �� GID
-			-n��GRPNAME
+		groupmod：
+			-g ： GID
+			-n：GRPNAME
 			
 		groupdel
 			
-		groupwd ��Ϊ���趨����
+		groupwd ：为组设定密码
 		
 		newgroup GRPNAME<-->exit
 		
 		
-��ϰ��
-   1����һ���û�mandriva����id��Ϊ2002��������Ϊdistro�����Ϊ3003����������Ϊlinux
+练习：
+   1创建一个用户mandriva，其id号为2002，基本组为distro（组号为3003），附加组为linux
    #groupadd -g 3003 distro
    #groupadd linux
    
-   2������һ���û�Fedora����ȫ��ΪFedora community��Ĭ��shellΪkcsh��
+   2、创建一个用户Fedora，其全名为Fedora community，默认shell为kcsh：
    
-   3���޸�mandirva��id��Ϊ4004��������Ϊlinux��������Ϊdistro��fedora��
-   4����Fedora�����룬���趨������Ϊ���ʹ������Ϊ2�죬�ʱ��Ϊ52��
-   5����mandriva��Ĭ��shell��Ϊ/bin/bash
-   6������ϵͳ�û�hbase���Ҳ��������¼ϵͳ��
+   3、修改mandirva的id号为4004，基本组为linux：附加组为distro和fedora：
+   4、给Fedora加密码，并设定其密码为最短使用期限为2天，最长时间为52天
+   5、将mandriva的默认shell该为/bin/bash
+   6、添加系统用户hbase，且不允许其登录系统；
    
    
    chage:
-   -d�����һ�ε��޸�ʱ��
-   -E:����ʱ��
-   -I:�ǻʱ��
-   -m�����ʹ������
-   -M:�ʹ��ʱ��
-   -W������ʱ��
+   -d；最近一次的修改时间
+   -E:过期时间
+   -I:非活动时间
+   -m：最短使用周期
+   -M:最长使用时间
+   -W：警告时间
    
- Ȩ�� ������
-     r�� 
-	 w��
-	 x��
-   �����û���
-   u:����
-   g:����
-   o:�����û�
+ 权限 管理：
+     r： 
+	 w：
+	 x：
+   三类用户：
+   u:属主
+   g:属组
+   o:其他用户
    
-   chown:�ı��ļ���Ŀ¼����������
+   chown:改变文件（目录）属主、组
 			#chown username file ...
-				-R:�޸�Ŀ¼�����ڲ��ļ�������
+				-R:修改目录及其内部文件的属主
 				--reference=/path/file  file ,...
 			chown username :grpname file,...
 			chown  :grpname file,...
@@ -198,64 +193,64 @@ chfn���޸�ע����Ϣ
 				-R
 				--reference=/path/file  file ,...
     
-   chmod:�޸��ļ���Ȩ��
-          �޸������û���Ȩ��
+   chmod:修改文件的权限
+          修改三类用户的权限
 					chmod MODE file...
 					-R
 					--reference=/path/file
 					
-     �޸�ĳ���û���ĳЩ���û�Ȩ��
-				chmod �û����(u,g,o,)=mode file��...
+     修改某类用户或某些类用户权限
+				chmod 用户类别(u,g,o,)=mode file，...
 				
 	 
 	 
-     �޸�ĳ����û�ĳλ��ĳЩλȨ��
+     修改某类的用户某位或某些位权限
 	 u,g,o,a.
-	 chmod �û����+|-mode file,...
+	 chmod 用户类别+|-mode file,...
 	 
 	 
-	 �ֶ������û�hive��������Ϊhive��5000�������� 
+	 手动添加用户hive，基本组为hive（5000）附加组 
 
 	 
- umask��������
-	 666-umask:�ļ�
-	 777-umask��Ŀ¼
+ umask：遮罩码
+	 666-umask:文件
+	 777-umask：目录
 	 
-	 �ļ�Ĭ�ϲ��ܾ���ִ��Ȩ�ޣ������õĽ������ִ��Ȩ�ޣ�����Ȩ�޼�һ
+	 文件默认不能具有执行权限，如果算得的结果中有执行权限，则将其权限加一
 	 
 	 
-	 ����umask 023
-	 �ļ� ��666-023=643 x
-	 Ŀ¼��777-023=754
+	 例：umask 023
+	 文件 ：666-023=643 x
+	 目录：777-023=754
 	 
-վ���û���¼�ĽǶ���˵��shell�����ͣ�
-	��¼ʽshell��
-		����ͨ��ĳ�ն˵�¼
+站在用户登录的角度来说，shell的类型：
+	登录式shell：
+		正常通过某终端登录
 		su - username
 		su -l username
 		
-	�ǵ�¼ʽshell��
+	非登录式shell：
 	     su  username 
-		 ͼ���ն��´������
-		 �Զ�ִ�е�shell�ű�
+		 图形终端下打开命令窗口
+		 自动执行的shell脚本
 		 
-					bash �������ļ���
-						ȫ������
+					bash 的配置文件：
+						全局配置
 							/etc/profile, /etc/profile.d/*.sh, /etc/bashrc
-						��������
+						个人配置
 							~/.bash_profile, ~/.bashrc
 	 
-				profile����ļ���
-					�趨��������
-					���������ű�
+				profile类的文件：
+					设定环境变量
+					运行命令或脚本
 		
-				bashrc����ļ���
-				�趨���ر���	
-				�����������
+				bashrc类的文件：
+				设定本地变量	
+				定义命令别名
 		
 		
-		��¼ʽshell��ζ�ȡ�����ļ���
+		登录式shell如何读取配置文件？
 			/etc/profile-->/etc/profile.d/*.sh -->~/.bash_profile-->~/.bashrc-->/etc/bashrc
-		�ǵ�¼ʽshell��������ļ���
+		非登录式shell如何配置文件？
 			~/.bashrc-->/etc/bashrc -->/etc/profile.d/*.sh
-			ע��bash���ű�������
+			注：bash：脚本解释器
