@@ -1,0 +1,28 @@
+文件与路径相关的基础命令
+cd，pwd,mkdir,rmdir,ls,cp,rm,mv
+cd :切换路径(change directory )
+pwd：显示当前目录(print working directory)
+mkdir：新建一个新的目录
+    -m:配置文件的权限。直接设置，不需要看默认权限（umask）
+    -p:帮助建立需要的目录，递归建立起来（包括上层目录）
+rmdir：删除一个空目录
+    -p:连同上层“空的”目录也一起删除
+    
+ls [-aAdfFhilnrRSt] 目录名称
+  -a:显示全部文件，包括隐藏文件
+  -d:仅列出目录本身，而不是列出目录内的文件数据
+  -l：列出长数据串，包含文件的属性与权限等数据
+cp[-adfilprsu] 源文件（source）  目标文件(destination)
+    -i：若目标文件存在时，在覆盖时会询问操作的进行
+    -r：递归持续复制，用于目录得复制行为
+rm 【-fir】 文件或目录
+    -f:force的意思，忽略不存在的文件，不会出现警告信息
+    -i：互动模式，即在删除询问是否操作
+    -r:递归删除。常用在目录的删除
+ mv [-fiu] source destination 
+    -f:如果目标文件存在，不会询问直接覆盖
+    -i:如果目标文件存在，会询问操作是否覆盖
+    -u:若目标文件存在，而且source比较新，才会更新
+    
+    
+    cat tac nl more less  touch  umask  file which whereis locate find
