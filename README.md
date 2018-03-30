@@ -2,21 +2,21 @@
 
 ![logo test](http://img.logonc.com/d/file/logo/20160818/d06bf248c201ad3a03796ce8efede16f.jpg)
 ## linux 基础笔记
-### 操作系统及其常用命令
+### 一、操作系统及其常用命令
 <br>"1." ![linux](https://github.com/foryounger/-/blob/master/linux/linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4)</br>
 
 <br>"2." ![一切皆文件之文件管理](https://)</br>
 
-### bash脚本编程相关知识
-<br>* ！[vim](http://)</br>
+### 二、bash脚本编程相关知识
+<br>* ![vim](http://)</br>
 <br>* </br>
 <br>* </br>
 
-### 用户与权限
+### 三、用户与权限
 <br>1. ![用户](https://)</br>
 <br>2. 权限</br>
 
-### 文件查找 grep等相关命令
+### 四、文件查找 grep等相关命令
 <br>1. 文件查找</br>
 <br>2. grep等</br>
 
