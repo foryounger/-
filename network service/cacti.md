@@ -4,11 +4,11 @@
   yum扩展源
   http://download.fedoraproject.org/pub/epel
   wget http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
-  rpm -Uvh epel-release-5-4.noarch.rpm
+  rpm -Uvh epel-release-5-4.noarch.rpm</br>
 
 
 
-  yum install  -y rrdtool httpd php php-mysql php-snmp php-xml php-gd mysql mysql-server net-snmp net-snmp-libs net-snmp-utils
+  <br>yum install  -y rrdtool httpd php php-mysql php-snmp php-xml php-gd mysql mysql-server net-snmp net-snmp-libs net-snmp-utils
   安装配置net-snmp
   1、安装net-snmp
 
@@ -26,8 +26,8 @@
   service mysqld start
   mysqladmin -uroot password myjob
   mysqladmin --user=root --password reload
-  安装cacti
-  1、下载cacti
+  安装cacti</br>
+  <br> 1、下载cacti
   cd /tmp
   wget http://www.cacti.net/downloads/cacti-0.8.8a.tar.gz
   tar xzf cacti-0.8.8a.tar.gz
