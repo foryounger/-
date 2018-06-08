@@ -1,4 +1,4 @@
-### cacti 安装配置
+## acti 安装配置
  <br>yum扩展源
   http://download.fedoraproject.org/pub/epel
   wget http://download.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
@@ -26,7 +26,7 @@
   mysqladmin --user=root --password reload 
   安装cacti</br> 
   <br> 1、下载cacti 
-    、、、    cd /tmp 
+        cd /tmp 
         wget http://www.cacti.net/downloads/cacti-0.8.8a.tar.gz 
         tar xzf cacti-0.8.8a.tar.gz 
         mv cacti-0.8.8a /var/www/html/cacti 
@@ -39,12 +39,12 @@
   mysql -uroot -p cacti < cacti.sql 
   
   4、创建数据库用户 
- 、、、 shell> mysql -uroot -p mysql 
+       mysql -uroot -p mysql 
        mysql> GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'myjob'; 
        mysql> flush privileges; 
- 、、、
+
   5、配置include/config.php 
-  、、、shell
+ 
      $database_type = "mysql"; 
      $database_default = "cacti"; 
      $database_hostname = "localhost"; 
@@ -61,7 +61,6 @@
      $url_path = "/cacti/"; 
      /* Default session name - Session name must contain alpha characters */ 
      #$cacti_session_name = "Cacti";
-、、、
 
   6、设置目录权限 
    chown -R cactiuser rra/ log/ 
@@ -80,5 +79,5 @@
  
    检测snmp是否可以取数据 
    snmpwalk -v 2c -c public 
- </br> 
+ 
  
