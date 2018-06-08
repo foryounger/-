@@ -26,11 +26,11 @@
   mysqladmin --user=root --password reload 
   安装cacti</br> 
   <br> 1、下载cacti 
-  cd /tmp 
-  wget http://www.cacti.net/downloads/cacti-0.8.8a.tar.gz 
-  tar xzf cacti-0.8.8a.tar.gz 
-  mv cacti-0.8.8a /var/www/html/cacti 
-  cd /var/www/html/cacti 
+    、、、    cd /tmp 
+        wget http://www.cacti.net/downloads/cacti-0.8.8a.tar.gz 
+        tar xzf cacti-0.8.8a.tar.gz 
+        mv cacti-0.8.8a /var/www/html/cacti 
+        cd /var/www/html/cacti 、、、
   
   2、创建数据库 
   mysqladmin --user=root -p create cacti 
@@ -39,31 +39,34 @@
   mysql -uroot -p cacti < cacti.sql 
   
   4、创建数据库用户 
-  shell> mysql -uroot -p mysql 
-  mysql> GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'myjob'; 
-  mysql> flush privileges; 
-  
+ 、、、 shell> mysql -uroot -p mysql 
+       mysql> GRANT ALL ON cacti.* TO cacti@localhost IDENTIFIED BY 'myjob'; 
+       mysql> flush privileges; 
+ 、、、
   5、配置include/config.php 
-   <br> $database_type = "mysql"; 
-   $database_default = "cacti"; 
-   $database_hostname = "localhost"; 
-   $database_username = "cacti"; 
-   $database_password = "myjob"; 
-   /* load up old style plugins here  */
-   $plugins = array(); 
-   //$plugins[] = 'thold'; 
-   /* 
-   Edit this to point to the default URL of your Cacti install 
-   ex: if your cacti install as at http://serverip/cacti/ this 
-   would be set to /cacti/ 
-   */ 
-   $url_path = "/cacti/"; 
-   /* Default session name - Session name must contain alpha characters */ 
-   #$cacti_session_name = "Cacti";</br>
-  
+  、、、shell
+     $database_type = "mysql"; 
+     $database_default = "cacti"; 
+     $database_hostname = "localhost"; 
+     $database_username = "cacti"; 
+     $database_password = "myjob"; 
+     /* load up old style plugins here  */
+     $plugins = array(); 
+     //$plugins[] = 'thold'; 
+     /* 
+     Edit this to point to the default URL of your Cacti install 
+     ex: if your cacti install as at http://serverip/cacti/ this 
+     would be set to /cacti/ 
+     */ 
+     $url_path = "/cacti/"; 
+     /* Default session name - Session name must contain alpha characters */ 
+     #$cacti_session_name = "Cacti";
+、、、
+
   6、设置目录权限 
    chown -R cactiuser rra/ log/ 
    cactiuser为系统存在的用户，为了收集数据。 
+   
   7、配置计划任务 
    crontab -e 
    */5 * * * * php /var/www/html/cacti/poller.php 
