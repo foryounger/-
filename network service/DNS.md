@@ -68,7 +68,7 @@ Master / Slave 数据的同步化过程
 
  </br>
  # DNS 区域配置文件
- <br> (1)资源记录：ResourceRecord, 简称rr；
+ <br>  (1)资源记录：ResourceRecord, 简称rr；
 
      区域数据库文件中的每一个记录条目
 
@@ -101,5 +101,44 @@ Master / Slave 数据的同步化过程
                            RR_TYPE ：资源区域数据库的资源记录的类型
 
                            value：值，可以包含多段组成</br>
+# bind的安装配置
+<br>yum install bind*
+
+
+DNS主配置文件，fyoungr.com域名，zone.fyoungr.com域的配置文件
+vi /etc/named.conf
+zone "fyoungr.com" IN {
+     type master;
+     file "zone.fyoungr.com";
+      allow-update { none; };
+};
+测试主配置文件
+named-checkconf
+新建域的配置文件zone.fyoungr.com
+vi /var/named/chroot/var/named/zone.fyoungr.com
+$TTL 86400
+@         IN   SOA xs.  fyoungr.com. (
+                                                 20180414
+                                                 3H
+                                                 15M
+                                                 1W
+                                                 1D
+                                                )
+          IN  NS  xs.
+          IN  MX 5 mail.
+www       IN  A   192.168.1.20
+ftp       IN  A   192.168.1.20
+mail      IN  A   192.168.1.20
+测试fyoungr.com域配置文件
+named-checkzone fyoungr.com  /var/named/chroot/var/named/zone.fyoungr.com
+建立域配置文件的软连接
+ln -s /var/named/chroot/var/named/zone.fyoungr.com  /var/named/zone.fyoungr.com
+重启named服务
+service named  restart
+设置DNS
+vi /etc/resolv.conf
+测试解析是否成功
+host www.fyoungr.com
+nslookup www.fyoungr.com </br>
  
  
